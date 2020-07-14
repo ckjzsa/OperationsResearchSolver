@@ -8,7 +8,7 @@ This is a simple OR solver with simplex method, Big-M method, branch-and-bound a
 
 ## Example
 Consider a simple linear programming problem:
-```math
+$$
 \begin{alignat}{2}
 
 \min \quad & z = 0x_1+0.1x_2+0.2x_3+0.3x_4+0.8x_5\\
@@ -22,7 +22,7 @@ Consider a simple linear programming problem:
 
 \end{alignat}
 
-```
+$$
 
 Then you can solve this problem with code below:
 ```
