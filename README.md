@@ -8,6 +8,8 @@ This is a simple OR solver with simplex method, Big-M method, branch-and-bound a
 
 ## Example
 Consider a simple linear programming problem:
+
+![](http://latex.codecogs.com/gif.latex?\\frac{1}{1+sin(x)})
 $$
 \begin{alignat}{2}
 
