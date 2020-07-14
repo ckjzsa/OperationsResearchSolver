@@ -1,5 +1,5 @@
 # OperationsResearchSolver
-Self-made OR solver
+A Self-made OR solver by Adrian Chen.
 
 ## Introduction
 
@@ -30,8 +30,13 @@ def main():
 
 ## To-do-list
 ~~1. Simplex method~~
+
 ~~2. Big-M method~~
+
 3. Branch-and-bound
+
 4. Cutting plane
+
 5. Solution conditions judgement
+
 6. Add multi-constraints at same time
