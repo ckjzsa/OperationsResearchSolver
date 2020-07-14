@@ -42,4 +42,6 @@ def main():
 
 5. Solution conditions judgement
 
-6. Add multi-constraints at same time
+6. Un-constrained x
+
+7. Add multi-constraints at same time
