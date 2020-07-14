@@ -9,7 +9,7 @@ This is a simple OR solver with simplex method, Big-M method, branch-and-bound a
 ## Example
 Consider a simple linear programming problem:
 
-<img src="./example.png" width = "500"/>
+<img src="./example.png" width = "300"/>
 
 
 Then you can solve this problem with code below:
