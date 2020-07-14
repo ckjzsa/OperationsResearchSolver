@@ -29,9 +29,9 @@ def main():
 ```
 
 ## To-do-list
-~~1. Simplex method~~
+1. ~~Simplex method~~
 
-~~2. Big-M method~~
+2. ~~Big-M method~~
 
 3. Branch-and-bound
 
