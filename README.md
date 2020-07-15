@@ -45,3 +45,5 @@ def main():
 6. Un-constrained x
 
 7. Add multi-constraints at same time
+
+8. Genetic algorithm
