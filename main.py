@@ -1,4 +1,4 @@
-from algorithm.problem_generation import Problem
+from OperationsResearchSolver.algorithm.problem_generation import Problem
 
 
 def main():

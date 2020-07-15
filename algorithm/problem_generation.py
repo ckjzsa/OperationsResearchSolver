@@ -1,5 +1,5 @@
-from algorithm.simplex_method import SimplexMethod
-from algorithm.big_m import BigM
+from OperationsResearchSolver.algorithm.simplex_method import SimplexMethod
+from OperationsResearchSolver.algorithm.big_m import BigM
 
 
 class Problem:
