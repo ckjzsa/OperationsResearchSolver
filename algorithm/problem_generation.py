@@ -1,3 +1,5 @@
+from algorithm.simplex_method import SimplexMethod
+from algorithm.big_m import BigM
 
 
 class Problem:
@@ -44,3 +46,17 @@ class Problem:
             self.a_matrix[i] += slack
 
         return self.cost_vector, self.a_matrix, self.b_vector
+
+    def solver(self):
+        c, a, b = self.standardization()
+        pb_bigm = BigM(c, a, b)
+        c, a, b, basis_index = pb_bigm.add_manual_variable()
+        initialization = SimplexMethod(c, a, b, basis_index)
+        x_index, x_value, z_value = initialization.solver()
+        x_index += 1
+        for x, value in zip(x_index, x_value):
+            print('x_{} is {}'.format(x, value))
+        print('The maximum value of this question is {}'.format(z_value[0]))
+
+        return [x_index.tolist(), x_value.tolist(), z_value[0]]
+
