@@ -75,4 +75,6 @@ def main():
 
 7. Add multi-constraints at same time
 
-8. Genetic algorithm
+8. 0-1 integer programming
+
+9. Genetic algorithm
