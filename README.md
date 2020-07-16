@@ -31,16 +31,22 @@ def main():
     print('The maximum value of this question is {}'.format(z_value[0]))
 ```
 
+## Debug
+1. Pivot in simplex method is based on B inverse b, not P;
+
+2. Fix the problem that the initial basis should be a diagonal matrix rather than a random unit matrix.
+
+
 ## To-do-list
 1. ~~Simplex method~~
 
 2. ~~Big-M method~~
 
-3. Branch-and-bound
+3. ~~Branch-and-bound~~
 
 4. Cutting plane
 
-5. Solution conditions judgement
+5. ~~Solution conditions judgement~~
 
 6. Un-constrained x
 
