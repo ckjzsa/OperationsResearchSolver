@@ -8,7 +8,7 @@ class SimplexMethod:
         temp = np.array([a_matrix[0]])
         for i in range(1, len(a_matrix)):
             temp = np.concatenate([temp, np.array([a_matrix[i]])], axis=0)
-        basis = len(a_matrix)
+
         self.c_vector = np.array(c_vector).astype(float)
         self.a_matrix = temp.astype(float)
         self.b_vector = np.array(b_vector).astype(float)
@@ -27,6 +27,7 @@ class SimplexMethod:
 
     def solver(self):
         # 1. 计算非基变量的检验数
+        b = np.dot(np.linalg.inv(self.basis), self.non_basis)
         sigma_non = self.cost_nonbasis - np.dot(np.dot(self.cost_basis, np.linalg.inv(self.basis)), self.non_basis)
         # 2. 检验数最大的换入基变量
         x_in = sigma_non.tolist().index(max(sigma_non))
@@ -43,7 +44,7 @@ class SimplexMethod:
         # 4. 开始循环迭代，直到检验数均小于0
         while max(sigma_non) > 0:
             # 找到主元，构建行变换矩阵
-            pivot = self.non_basis[x_out][x_in]
+            pivot = B_inv_p[x_out]  # 注意主元在B-1P中，不在P中
             P = self.non_basis[:, x_in].copy()
             for i in range(len(P)):
                 if i == x_out:
@@ -69,6 +70,7 @@ class SimplexMethod:
             # 计算新的检验数
             sigma_non = self.cost_nonbasis - np.dot(np.dot(self.cost_basis, np.linalg.inv(self.basis)), self.non_basis)
             x_in = sigma_non.tolist().index(max(sigma_non))
+            a = np.dot(np.linalg.inv(self.basis), self.non_basis[:, 1])
             B_inv_p = np.dot(np.linalg.inv(self.basis), self.non_basis[:, x_in])
 
             # theta最小的换出基变量

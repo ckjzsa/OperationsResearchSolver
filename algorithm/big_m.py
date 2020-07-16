@@ -37,11 +37,13 @@ class BigM:
                 self.unit_vector_position.append(i)
 
         self.num_manual_variable = unit_vector_required
+        self.one_index = one_index
         self.basis_index = unit_vector
         self.cost_vector = c_vector
         self.b_vector = b_vector
         self.a_matrix = a_matrix
         self.bigM = max(c_vector) * 10 if max(c_vector) > 0 else 10.0
+        self.manual_index = [i for i in range(len(self.cost_vector), len(self.cost_vector)+self.num_manual_variable)]
 
     def add_manual_variable(self):
         self.cost_vector += [-self.bigM for _ in range(self.num_manual_variable)]
@@ -54,5 +56,16 @@ class BigM:
         for i, j in zip(range(1, self.num_manual_variable+1), self.unit_vector_position):
             self.a_matrix[j][-i] = 1
             self.basis_index.append(len(self.a_matrix[0])-i)
+            self.one_index.append(j)
 
-        return self.cost_vector, self.a_matrix, self.b_vector, self.basis_index
+        order_dict = {}
+        for i, j in zip(self.basis_index, self.one_index):
+            order_dict[i] = j
+
+        # 根据单位矩阵的位置排序，最后返回的basis index必须为对角阵
+        order_dict = sorted(order_dict.items(), key=lambda x: x[1], reverse=False)
+        self.basis_index = []
+        for i in order_dict:
+            self.basis_index.append(i[0])
+
+        return self.cost_vector, self.a_matrix, self.b_vector, self.basis_index, self.manual_index
