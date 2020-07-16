@@ -3,16 +3,16 @@ from OperationsResearchSolver.algorithm.big_m import BigM
 
 
 class Problem:
-    def __init__(self, cost_vector, max_problem=True):
+    def __init__(self, cost_vector, a_matrix=[], b_vector=[], logic_symbol=[], max_problem=True):
         # 默认x均>=0
         if max_problem:
             self.cost_vector = cost_vector
         else:
             self.cost_vector = [i * -1 for i in cost_vector]
 
-        self.a_matrix = []
-        self.b_vector = []
-        self.logic_symbol = []
+        self.a_matrix = a_matrix
+        self.b_vector = b_vector
+        self.logic_symbol = logic_symbol
         self.slack_variable_count = []
         self.larger_count = []
 

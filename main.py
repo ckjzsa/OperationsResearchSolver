@@ -1,14 +1,20 @@
 from OperationsResearchSolver.algorithm.problem_generation import Problem
+from OperationsResearchSolver.algorithm.branch_and_bound import BranchAndBound
 
 
 def main():
-    pb = Problem([0, 0.1, 0.2, 0.3, 0.8], max_problem=False)
+    pb = Problem([40, 90], max_problem=True)
     # 约束时保证维度一致
-    pb.add_constraint([1, 2, 0, 1, 0], '=', 100)
-    pb.add_constraint([0, 0, 2, 2, 1], '=', 100)
-    pb.add_constraint([3, 1, 2, 0, 3], '=', 100)
+    pb.add_constraint([9, 7], '<=', 56)
+    pb.add_constraint([7, 20], '<=', 70)
+
     # solver会打印并返回结果
     pb.solver()
+
+    # 整型规划
+    ILP = True
+    c, a, b = pb.standardization()
+    pb_ilp = BranchAndBound(c, a, b)
 
 
 if __name__ == '__main__':
