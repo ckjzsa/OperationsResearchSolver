@@ -59,6 +59,10 @@ def main():
 
 2. Fix the problem that the initial basis should be a diagonal matrix rather than a random unit matrix.
 
+3. Optimize bound judgement in ILP solver.
+
+4. Introduce old-solution-buffer to avoid endless loop.
+
 
 ## To-do-list
 1. ~~Simplex method~~
