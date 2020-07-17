@@ -70,18 +70,22 @@ class Problem:
         pb_bigm = BigM(c, a, b)
         c, a, b, basis_index, mannual_index = pb_bigm.add_manual_variable()
         initialization = SimplexMethod(c, a, b, basis_index)
-        x_index, x_value, z_value = initialization.solver()
-        x_index += 1
+        result = initialization.solver()
+        if result is False:
+            return False
+
+        x_index, x_value, z_value = result[0], result[1], result[2]
         if not self.ilp:
             for x, value in zip(x_index, x_value):
-                print('x_{} is {}'.format(x, value))
+                print('x_{} is {}'.format(x+1, value))
             print('The maximum value of this question is {}'.format(z_value[0]))
 
-            for index in x_index:
-                if index in mannual_index:
+        for index in x_index:
+            if index in mannual_index:
+                if not self.ilp:
                     print('无可行解！')
-                    return False
-
+                return False
+        x_index += 1
         self.cost_vector = self.cost_vector[:self.original_column]
         self.a_matrix = [row[:self.original_column] for row in self.a_matrix[:self.original_row]]
         self.b_vector = self.b_vector[:self.original_row]

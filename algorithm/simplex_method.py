@@ -68,9 +68,12 @@ class SimplexMethod:
             self.cost_basis[x_out], self.cost_nonbasis[x_in] = self.cost_nonbasis[x_in], self.cost_basis[x_out]
 
             # 计算新的检验数
-            sigma_non = self.cost_nonbasis - np.dot(np.dot(self.cost_basis, np.linalg.inv(self.basis)), self.non_basis)
+            try:
+                sigma_non = self.cost_nonbasis - np.dot(np.dot(self.cost_basis, np.linalg.inv(self.basis)), self.non_basis)
+            except Exception:
+                return False
+
             x_in = sigma_non.tolist().index(max(sigma_non))
-            a = np.dot(np.linalg.inv(self.basis), self.non_basis[:, 1])
             B_inv_p = np.dot(np.linalg.inv(self.basis), self.non_basis[:, x_in])
 
             # theta最小的换出基变量
@@ -86,5 +89,5 @@ class SimplexMethod:
         res_z = np.dot(self.cost_basis, res_B_inv_b)
         res_B_inv_b = np.stack(res_B_inv_b, axis=1)[0]
 
-        return res_x, res_B_inv_b, res_z
+        return [res_x, res_B_inv_b, res_z]
 

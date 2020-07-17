@@ -25,13 +25,13 @@ class BranchAndBound:
         [x_index, x_value, z_value] = pb.solver()
 
         initial_res = [x_index, x_value, z_value]
-        # 初始上界和下界
-        self.upper_bound = z_value
-        self.lower_bound = 0
+        # 初始下界
+        self.lower_bound = -1e108
+
+        # 储存旧的解
+        self.old_solution = []
 
         self.queue.append([initial_res, self.cost_vector, self.a_matrix, self.b_vector, self.logic_symbol])
-
-        pass
 
     def solver(self):
         while self.queue:
@@ -48,9 +48,6 @@ class BranchAndBound:
             initial_x_value = res[1]
             initial_z_value = res[2]
 
-            if initial_z_value < self.lower_bound:
-                continue
-
             branch_index = None
             branch_value = None
 
@@ -64,7 +61,6 @@ class BranchAndBound:
             if branch_index is None:  # 所有解均为整数, 更新下界
                 if initial_z_value > self.lower_bound:
                     self.lower_bound = initial_z_value
-                    self.opt_z = initial_z_value
 
             # 进行分支
             # 小于的部分
@@ -79,23 +75,28 @@ class BranchAndBound:
             pb_less.add_constraint(add_a, '<=', math.floor(branch_value))
             res_less = pb_less.solver()
 
+            # 防止陷入死循环
+            if res_less in self.old_solution:
+                continue
+            else:
+                self.old_solution.append(res_less)
+
             # 补充判断是否有可行解
             if not res_less:
                 pass
             else:
                 integer_count = 0
                 for x_index, x_value in zip([i-1 for i in res_less[0]], res_less[1]):
-                    if x_index in self.integer_index and math.ceil(x_value) != x_value and res_less[2] < self.upper_bound:
-                        self.upper_bound = res_less[2]
-                    elif x_index in self.integer_index and math.ceil(x_value) == x_value:
+                    if x_index in self.integer_index and math.ceil(x_value) == x_value:
                         # 全部满足整数条件
                         integer_count += 1
                 if integer_count == len(self.integer_index) and res_less[2] > self.lower_bound:
+                    # 如果解全为整数，则更新下界
                     self.lower_bound = res_less[2]
                     self.result = res_less
                 elif res_less[2] < self.lower_bound:  # 如果结果小于下界，则不满足要求
                     pass
-                else:
+                else:  # 解不全为整数，但是大于下界，则继续向下分
                     # 生成新的约束，加入队列
                     add_a = [0] * len(a[0])
                     add_a[branch_index] = 1
@@ -119,14 +120,17 @@ class BranchAndBound:
             pb_more.add_constraint(add_a, '>=', math.ceil(branch_value))
             res_more = pb_more.solver()
 
+            if res_more in self.old_solution:
+                continue
+            else:
+                self.old_solution.append(res_less)
+
             if not res_more:
                 pass
             else:
                 integer_count = 0
                 for x_index, x_value in zip([i-1 for i in res_more[0]], res_more[1]):
-                    if x_index in self.integer_index and math.ceil(x_value) != x_value and res_more[2] < self.upper_bound:
-                        self.upper_bound = res_more[2]
-                    elif x_index in self.integer_index and math.ceil(x_value) == x_value:
+                    if x_index in self.integer_index and math.ceil(x_value) == x_value:
                         # 全部满足整数条件
                         integer_count += 1
                 if integer_count == len(self.integer_index) and res_more[2] > self.lower_bound:
@@ -146,5 +150,7 @@ class BranchAndBound:
                     symbol_queue_more = copy.deepcopy(symbol)
                     symbol_queue_more.append(['>='])
                     self.queue.append([res_more, c_queue_more, a_queue_more, b_queue_more, symbol_queue_more])
+
+                pass
 
         return self.result

@@ -8,11 +8,12 @@ def main():
     pb.add_constraint([9, 7], '<=', 56)
     pb.add_constraint([7, 20], '<=', 70)
 
+    # 普通线性规划
     # solver会打印并返回结果
     # pb.solver()
 
     # 整型规划
-    integer_index = [0, 1]
+    integer_index = [1]
     c, a, b, symbol = pb.origin()
     pb_ilp = BranchAndBound(integer_index, c, a, b, symbol)
     result = pb_ilp.solver()
