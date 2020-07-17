@@ -88,3 +88,12 @@ def main():
 11. Column generation
 
 12. Branch and price
+
+## Cite my solver
+    @misc{adrianorsolver,
+    title={Operations Research Solver},
+    author={Chen, Kehua},
+    url={https://github.com/ckjzsa/OperationsResearchSolver/},
+    year={2020},
+    publisher={Github}}
+
