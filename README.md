@@ -82,3 +82,9 @@ def main():
 8. 0-1 integer programming
 
 9. Genetic algorithm
+
+10. Dual problem generation
+
+11. Column generation
+
+12. Branch and price
