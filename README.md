@@ -35,7 +35,7 @@ def main():
 ### Integer LP 
 Consider a integer linear programming problem:
 
-<img src="./examples/MIP.png" width = "300"/>
+<img src="./examples/MIP.png" width = "200"/>
 
 
 Then you can solve this problem with code below:
@@ -59,7 +59,7 @@ def main():
 ### Genetic Algorithm
 Consider a user wants to find the maximum value of a simple multi-variable optimization problem:
 
-<img src="./examples/GA.png" width = "150"/>
+<img src="./examples/GA.png" width = "200"/>
 
 
 The user should define functions first, the variables should be input as a list:
