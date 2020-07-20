@@ -74,7 +74,7 @@ def main():
     pb.solver()
 
 ```
-Which should be noted is that $fitness_symbol$ indicates the range of functions: $'+'$ means greater than zero, $'-'$ means less than zero, while $'+-'$ or $'-+'$ means all real numbers.
+Which should be noted is that  ```fitness_symbol``` indicates the range of functions: '+' means greater than zero, '-' means less than zero, while '+-' or '-+' means all real numbers.
 
 ## Debug
 1. Pivot in simplex method is based on B inverse b, not P;
