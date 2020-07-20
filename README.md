@@ -10,7 +10,7 @@ This is a simple OR solver with simplex method, Big-M method, branch-and-bound a
 ### Simple LP
 Consider a simple linear programming problem:
 
-<img src="./examples/LP.png" width = "400"/>
+<img src="./examples/LP.png" width = "300"/>
 
 
 Then you can solve this problem with code below:
@@ -35,7 +35,7 @@ def main():
 ### Integer LP 
 Consider a integer linear programming problem:
 
-<img src="./examples/MIP.png" width = "400"/>
+<img src="./examples/MIP.png" width = "200"/>
 
 
 Then you can solve this problem with code below:
@@ -57,7 +57,7 @@ def main():
 ```
 
 ### Genetic Algorithm
-Consider a simple multi-variable optimization problem:
+Consider a user wants to find the maximum value of a simple multi-variable optimization problem:
 
 <img src="./examples/GA.png" width = "200"/>
 
