@@ -10,7 +10,7 @@ class NaiveGeneticAlgorithm:
         self.new_individuals = []  # 新一代个体
         self.dimension = dimension  # 变量维度
         self.sol_range = sol_range
-        self.interval = sol_range[1] - sol_range[0]  # 求解范围
+        # self.interval = sol_range[1] - sol_range[0]  # 求解范围
         self.elitist = {'chromosome': [0 for _ in range(self.dimension)], 'fitness': float('-inf')}
 
         # 超参数
@@ -32,14 +32,14 @@ class NaiveGeneticAlgorithm:
         # 评价函数
         self.fitness_function = fitness_function
 
-    def decode(self, chromosome):   # 解码后的十进制数
+    def decode(self, chromosome, dim):   # 解码后的十进制数
         binary_num = 2 ** self.chrom_size - 1
-        decode_num = self.sol_range[0] + chromosome * self.interval / binary_num
+        decode_num = self.sol_range[dim][0] + chromosome * (self.sol_range[dim][1] - self.sol_range[dim][0]) / binary_num
 
         return decode_num
 
     def fitness_sol(self, chroms):
-        variables = [self.decode(chrom) for chrom in chroms]
+        variables = [self.decode(chrom, dim) for chrom, dim in zip(chroms, [j for j in range(self.dimension)])]
         res = self.fitness_function(variables)
 
         return res
@@ -147,7 +147,7 @@ class NaiveGeneticAlgorithm:
             best_sol = []
             print("Epoch {}, maximum fitness is {}, mean fitness is {}".format(i, max(self.fitness), sum(self.fitness) / self.size))
             best_index = self.fitness.index(max(self.fitness))
-            for j in self.individuals[best_index]:
-                best_sol.append(self.decode(j))
+            for j, dim in zip(self.individuals[best_index], [k for k in range(self.dimension)]):
+                best_sol.append(self.decode(j, dim))
             print("Best solution is {}".format(best_sol))
 

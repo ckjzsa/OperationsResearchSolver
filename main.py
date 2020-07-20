@@ -1,7 +1,6 @@
 from algorithm.problem_generation import Problem
 from algorithm.branch_and_bound import BranchAndBound
 from algorithm.genetic_algorithm import NaiveGeneticAlgorithm
-import math
 
 
 def func(variables):
@@ -32,7 +31,8 @@ def main():
     # print('最大值为{}'.format(result[2]))
 
     # 遗传算法
-    pb = NaiveGeneticAlgorithm(size=50, dimension=2, sol_range=[-5, 5],
+    sol_range = {0: [-5, 5], 1: [-5, 5]}  # 指定自变量区间
+    pb = NaiveGeneticAlgorithm(size=50, dimension=2, sol_range=sol_range,
                                chrom_size=25, cp=0.8, mp=0.1, gen_max=500, fitness_function=func, fitness_symbol='+-')
     pb.solver()
 
