@@ -189,6 +189,7 @@
       <configuration name="PythonConfigurationType">
         <watch expression="self.queue" />
         <watch expression="a[0]" />
+        <watch expression="sp" />
       </configuration>
     </watches-manager>
   </component>
