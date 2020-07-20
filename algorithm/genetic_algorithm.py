@@ -2,7 +2,7 @@ import random
 
 
 class NaiveGeneticAlgorithm:
-    def __init__(self, size, dimension, sol_range, chrom_size, cp, mp, gen_max, fitness_function):
+    def __init__(self, size, dimension, sol_range, chrom_size, cp, mp, gen_max, fitness_function, fitness_symbol):
         # 种群信息
         self.individuals = []  # 个体信息
         self.fitness = []  # 适应度
@@ -11,15 +11,15 @@ class NaiveGeneticAlgorithm:
         self.dimension = dimension  # 变量维度
         self.sol_range = sol_range
         self.interval = sol_range[1] - sol_range[0]  # 求解范围
-        self.elitist = {'chromosome': [0 for _ in range(self.dimension)], 'fitness': float('-inf'), 'age': 0}
+        self.elitist = {'chromosome': [0 for _ in range(self.dimension)], 'fitness': float('-inf')}
 
         # 超参数
         self.size = size  # 种群规模
         self.chrom_size = chrom_size  # 染色体长度
         self.cross_over = cp  # 交叉变异概率
         self.mutation = mp  # 突变概率
-        self.cur_generation = 0  # 当前代数
         self.generation_max = gen_max
+        self.fitness_symbol = fitness_symbol  # 判断函数的fitness全是正，全是负，还是有正有负
 
         # 初始化种群
         binary_length = 2 ** self.chrom_size - 1  # 二进制长度
@@ -39,17 +39,22 @@ class NaiveGeneticAlgorithm:
         return decode_num
 
     def fitness_sol(self, chroms):
-        variable = [self.decode(chrom) for chrom in chroms]
-        x = variable[0]
-        y = variable[1]
-        res = self.fitness_function(x, y)
+        variables = [self.decode(chrom) for chrom in chroms]
+        res = self.fitness_function(variables)
 
         return res
 
     def evaluate(self):  # 进行打分
         sp = self.select_pro
         for i in range(self.size):
-            self.fitness[i] = -1 / self.fitness_sol(self.individuals[i])
+            # 对正负fitness的结果进行调整
+            if self.fitness_symbol == '+':
+                self.fitness[i] = self.fitness_sol(self.individuals[i])
+            elif self.fitness_symbol == '-':
+                self.fitness[i] = 1 / self.fitness_sol(self.individuals[i])
+            else:
+                self.fitness[i] = self.fitness_sol(self.individuals[i]) if self.fitness_sol(self.individuals[i]) >= 0 \
+                    else 0
         fitness_sum = sum(self.fitness)
         for i in range(self.size):
             sp[i] = self.fitness[i] / float(fitness_sum)
@@ -102,8 +107,6 @@ class NaiveGeneticAlgorithm:
         if j >= 0:
             for i in range(self.dimension):
                 self.elitist['chromosome'][i] = self.individuals[j][i]
-
-            # self.elitist['age'] = self.cur_generation
 
     def evolve(self):
         self.evaluate()

@@ -4,8 +4,10 @@ from algorithm.genetic_algorithm import NaiveGeneticAlgorithm
 import math
 
 
-def func(x, y):
-    return -(x-1)**2 - (y-2)**2
+def func(variables):
+    x = variables[0]
+    y = variables[1]
+    return -(x-1)**2 - (y-2)**2 + 5
 
 
 def main():
@@ -31,7 +33,7 @@ def main():
 
     # 遗传算法
     pb = NaiveGeneticAlgorithm(size=50, dimension=2, sol_range=[-5, 5],
-                               chrom_size=25, cp=0.8, mp=0.1, gen_max=500, fitness_function=func)
+                               chrom_size=25, cp=0.8, mp=0.1, gen_max=500, fitness_function=func, fitness_symbol='+-')
     pb.solver()
 
 
