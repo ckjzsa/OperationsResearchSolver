@@ -54,6 +54,29 @@ def main():
     print('最大值为{}'.format(result[2]))
 ```
 
+### Genetic Algorithm
+Consider a simple multi-variable optimization problem:
+
+
+The user should define functions first, the variables should be input as a list:
+```
+def func(variables):
+    x = variables[0]
+    y = variables[1]
+    return -(x-1)**2 - (y-2)**2 + 5
+```
+Then initialize genetic algorithm solver and solve it:
+```
+def main():
+    # 遗传算法
+    sol_range = {0: [-5, 5], 1: [-5, 5]}  # 指定自变量区间
+    pb = NaiveGeneticAlgorithm(size=50, dimension=2, sol_range=sol_range,
+                               chrom_size=25, cp=0.8, mp=0.1, gen_max=500, fitness_function=func, fitness_symbol='+-')
+    pb.solver()
+
+```
+Which should be noted is that  ```fitness_symbol``` indicates the range of functions: '+' means greater than zero, '-' means less than zero, while '+-' or '-+' means all real numbers.
+
 ## Debug
 1. Pivot in simplex method is based on B inverse b, not P;
 
@@ -62,6 +85,8 @@ def main():
 3. Optimize bound judgement in ILP solver.
 
 4. Introduce old-solution-buffer to avoid endless loop.
+
+5. Adjust genetic algorithm in terms of negative/positive values of fitness.
 
 
 ## To-do-list
