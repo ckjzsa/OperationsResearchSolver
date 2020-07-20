@@ -35,7 +35,7 @@ def main():
 ### Integer LP 
 Consider a integer linear programming problem:
 
-<img src="./examples/MIP.png" width = "200"/>
+<img src="./examples/MIP.png" width = "250"/>
 
 
 Then you can solve this problem with code below:
