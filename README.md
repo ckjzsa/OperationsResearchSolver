@@ -75,19 +75,17 @@ def main():
 
 5. ~~Solution conditions judgement~~
 
-6. Un-constrained x
+6. Add multi-constraints at same time
 
-7. Add multi-constraints at same time
+7. 0-1 integer programming
 
-8. 0-1 integer programming
+8. ~~Genetic algorithm~~
 
-9. Genetic algorithm
+9. Dual problem generation
 
-10. Dual problem generation
+10. Column generation
 
-11. Column generation
-
-12. Branch and price
+11. Branch and price
 
 ## Cite my solver
     @misc{adrianorsolver,
