@@ -94,27 +94,27 @@ Which should be noted is that  ```fitness_symbol``` indicates the range of funct
 
 
 ## To-do-list
-- [x] ~~Simplex method~~
+- [x] Simplex method
 
-2. ~~Big-M method~~
+- [x] Big-M method
 
-3. ~~Branch-and-bound~~
+- [x] Branch-and-bound
 
-4. Cutting plane
+- [ ] Cutting plane
 
-5. ~~Solution conditions judgement~~
+- [x] Solution conditions judgement
 
-6. Add multi-constraints at same time
+- [ ] Add multi-constraints at same time
 
-7. 0-1 integer programming
+- [ ] 0-1 integer programming
 
-8. ~~Genetic algorithm~~
+- [x] Genetic algorithm
 
-9. Dual problem generation
+- [ ] Dual problem generation
 
-10. Column generation
+- [ ] Column generation
 
-11. Branch and price
+- [ ] Branch and price
 
 ## Cite my solver
     @misc{adrianorsolver,
