@@ -94,7 +94,7 @@ Which should be noted is that  ```fitness_symbol``` indicates the range of funct
 
 
 ## To-do-list
-1. ~~Simplex method~~
+- [x] ~~Simplex method~~
 
 2. ~~Big-M method~~
 
